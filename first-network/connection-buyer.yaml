@@ -1,0 +1,88 @@
+---
+name: first-network-org2
+version: 1.0.0
+client:
+  organization: Org2
+  connection:
+    timeout:
+      peer:
+        endorser: '300'
+organizations:
+  Org2:
+    mspid: Org2MSP
+    peers:
+    - peer0.org2.mediacoin.com
+    - peer1.org2.mediacoin.com
+    certificateAuthorities:
+    - ca.org2.mediacoin.com
+peers:
+  peer0.org2.mediacoin.com:
+    url: grpcs://localhost:9051
+    tlsCACerts:
+      pem: |
+        -----BEGIN CERTIFICATE-----
+        MIICYjCCAgmgAwIBAgIQXGZJ77EmJLQqgTU3NxuMXzAKBggqhkjOPQQDAjB8MQsw
+        CQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNU2FuIEZy
+        YW5jaXNjbzEcMBoGA1UEChMTYnV5ZXIubWVkaWFjb2luLmNvbTEiMCAGA1UEAxMZ
+        dGxzY2EuYnV5ZXIubWVkaWFjb2luLmNvbTAeFw0yMDA0MjYyMzAxMDBaFw0zMDA0
+        MjQyMzAxMDBaMHwxCzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpDYWxpZm9ybmlhMRYw
+        FAYDVQQHEw1TYW4gRnJhbmNpc2NvMRwwGgYDVQQKExNidXllci5tZWRpYWNvaW4u
+        Y29tMSIwIAYDVQQDExl0bHNjYS5idXllci5tZWRpYWNvaW4uY29tMFkwEwYHKoZI
+        zj0CAQYIKoZIzj0DAQcDQgAEZJGd2B5fVJjAzuBgBG+nQk88M6E4aAa4FpubX7j9
+        yQ+e+g95sGCnxRxclPWevhID6vNXTEk60PIteyCCooeslaNtMGswDgYDVR0PAQH/
+        BAQDAgGmMB0GA1UdJQQWMBQGCCsGAQUFBwMCBggrBgEFBQcDATAPBgNVHRMBAf8E
+        BTADAQH/MCkGA1UdDgQiBCDkyhvlYNaVLiME0MzaQ5C5an2iA6miE/ekNsAsPuAX
+        /DAKBggqhkjOPQQDAgNHADBEAiBgxgctfhfndgGVcUfm1VfMxh5NQ2KT4KJGKOnQ
+        mux1XAIgA7dHGeivdQZ69aEKZo+PyyLB8sYV0VQVwGIKpYIChSY=
+        -----END CERTIFICATE-----
+        
+    grpcOptions:
+      ssl-target-name-override: peer0.org2.mediacoin.com
+      hostnameOverride: peer0.org2.mediacoin.com
+  peer1.org2.mediacoin.com:
+    url: grpcs://localhost:10051
+    tlsCACerts:
+      pem: |
+        -----BEGIN CERTIFICATE-----
+        MIICYjCCAgmgAwIBAgIQXGZJ77EmJLQqgTU3NxuMXzAKBggqhkjOPQQDAjB8MQsw
+        CQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNU2FuIEZy
+        YW5jaXNjbzEcMBoGA1UEChMTYnV5ZXIubWVkaWFjb2luLmNvbTEiMCAGA1UEAxMZ
+        dGxzY2EuYnV5ZXIubWVkaWFjb2luLmNvbTAeFw0yMDA0MjYyMzAxMDBaFw0zMDA0
+        MjQyMzAxMDBaMHwxCzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpDYWxpZm9ybmlhMRYw
+        FAYDVQQHEw1TYW4gRnJhbmNpc2NvMRwwGgYDVQQKExNidXllci5tZWRpYWNvaW4u
+        Y29tMSIwIAYDVQQDExl0bHNjYS5idXllci5tZWRpYWNvaW4uY29tMFkwEwYHKoZI
+        zj0CAQYIKoZIzj0DAQcDQgAEZJGd2B5fVJjAzuBgBG+nQk88M6E4aAa4FpubX7j9
+        yQ+e+g95sGCnxRxclPWevhID6vNXTEk60PIteyCCooeslaNtMGswDgYDVR0PAQH/
+        BAQDAgGmMB0GA1UdJQQWMBQGCCsGAQUFBwMCBggrBgEFBQcDATAPBgNVHRMBAf8E
+        BTADAQH/MCkGA1UdDgQiBCDkyhvlYNaVLiME0MzaQ5C5an2iA6miE/ekNsAsPuAX
+        /DAKBggqhkjOPQQDAgNHADBEAiBgxgctfhfndgGVcUfm1VfMxh5NQ2KT4KJGKOnQ
+        mux1XAIgA7dHGeivdQZ69aEKZo+PyyLB8sYV0VQVwGIKpYIChSY=
+        -----END CERTIFICATE-----
+        
+    grpcOptions:
+      ssl-target-name-override: peer1.org2.mediacoin.com
+      hostnameOverride: peer1.org2.mediacoin.com
+certificateAuthorities:
+  ca.org2.mediacoin.com:
+    url: https://localhost:8054
+    caName: ca-org2
+    tlsCACerts:
+      pem: |
+        -----BEGIN CERTIFICATE-----
+        MIICXzCCAgSgAwIBAgIRAJRN4DnhRYpq399ogG7iVtQwCgYIKoZIzj0EAwIweTEL
+        MAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFjAUBgNVBAcTDVNhbiBG
+        cmFuY2lzY28xHDAaBgNVBAoTE2J1eWVyLm1lZGlhY29pbi5jb20xHzAdBgNVBAMT
+        FmNhLmJ1eWVyLm1lZGlhY29pbi5jb20wHhcNMjAwNDI2MjMwMTAwWhcNMzAwNDI0
+        MjMwMTAwWjB5MQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQG
+        A1UEBxMNU2FuIEZyYW5jaXNjbzEcMBoGA1UEChMTYnV5ZXIubWVkaWFjb2luLmNv
+        bTEfMB0GA1UEAxMWY2EuYnV5ZXIubWVkaWFjb2luLmNvbTBZMBMGByqGSM49AgEG
+        CCqGSM49AwEHA0IABOJMz5xRiVZcGq74qEk68nj0r1dMfF1x7zXrIX5MwBnWANnF
+        x0IY5VOmFiTcUcBguvn+XNRjagEr3pbuqQKNXK2jbTBrMA4GA1UdDwEB/wQEAwIB
+        pjAdBgNVHSUEFjAUBggrBgEFBQcDAgYIKwYBBQUHAwEwDwYDVR0TAQH/BAUwAwEB
+        /zApBgNVHQ4EIgQg2Wi5mSi1uMlSVWPWeULv9vUKawOZXmHMZRovvy+hiicwCgYI
+        KoZIzj0EAwIDSQAwRgIhAJdzrDVmd4eXg/f6pXimZXbLndJ9fkgO2wxJPaSGL95i
+        AiEAwLQLx6ssVSaK1MsdYQc2d5nM6yyhA1kT4t+vEPyGD4U=
+        -----END CERTIFICATE-----
+        
+    httpOptions:
+      verify: false

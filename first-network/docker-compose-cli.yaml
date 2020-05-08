@@ -1,0 +1,167 @@
+# Copyright IBM Corp. All Rights Reserved.
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+
+version: '2'
+
+volumes:
+  orderer.mediacoin.com:
+  peer0.artist.mediacoin.com:
+  peer1.artist.mediacoin.com:
+  peer0.buyer.mediacoin.com:
+  peer1.buyer.mediacoin.com:
+  ca.artist.mediacoin.com:
+  ca.buyer.mediacoin.com:
+
+networks:
+  byfn:
+
+services:
+  ca.artist.mediacoin.com:
+    image: hyperledger/fabric-ca
+    environment:
+      - FABRIC_CA_SERVER_TLS_ENABLED=true
+      - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
+      - FABRIC_CA_SERVER_CA_NAME=ca.artist.mediacoin.com
+      - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.artist.mediacoin.com-cert.pem
+      - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/ca.artist.mediacoin.com_sk
+    ports:
+      - "7054:7054"
+    command: sh -c 'fabric-ca-server start -b admin:adminpw'
+    volumes:
+      - ./crypto-config/peerOrganizations/artist.mediacoin.com/ca/:/etc/hyperledger/fabric-ca-server-config
+    container_name: ca.artist.mediacoin.com
+    networks:
+      - byfn
+
+  ca.buyer.mediacoin.com:
+    image: hyperledger/fabric-ca
+    environment:
+      - FABRIC_CA_SERVER_TLS_ENABLED=true
+      - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
+      - FABRIC_CA_SERVER_CA_NAME=ca.buyer.mediacoin.com
+      - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.buyer.mediacoin.com-cert.pem
+      - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/ca.buyer.mediacoin.com_sk
+    ports:
+      - "8054:7054"
+    command: sh -c 'fabric-ca-server start -b admin:adminpw'
+    volumes:
+      - ./crypto-config/peerOrganizations/buyer.mediacoin.com/ca/:/etc/hyperledger/fabric-ca-server-config
+    container_name: ca.buyer.mediacoin.com
+    networks:
+      - byfn
+  
+  orderer.mediacoin.com:
+    extends:
+      file:   base/docker-compose-base.yaml
+      service: orderer.mediacoin.com
+    container_name: orderer.mediacoin.com
+    networks:
+      - byfn
+
+  orderer2.mediacoin.com:
+    extends:
+      file:   base/docker-compose-base.yaml
+      service: orderer2.mediacoin.com
+    container_name: orderer2.mediacoin.com
+    networks:
+      - byfn
+  
+  orderer3.mediacoin.com:
+    extends:
+      file:   base/docker-compose-base.yaml
+      service: orderer3.mediacoin.com
+    container_name: orderer3.mediacoin.com
+    networks:
+      - byfn
+    
+  orderer4.mediacoin.com:
+    extends:
+      file:   base/docker-compose-base.yaml
+      service: orderer4.mediacoin.com
+    container_name: orderer4.mediacoin.com
+    networks:
+      - byfn
+
+  orderer5.mediacoin.com:
+    extends:
+      file:   base/docker-compose-base.yaml
+      service: orderer5.mediacoin.com
+    container_name: orderer5.mediacoin.com
+    networks:
+      - byfn
+
+  peer0.artist.mediacoin.com:
+    container_name: peer0.artist.mediacoin.com
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer0.artist.mediacoin.com
+    networks:
+      - byfn
+
+  peer1.artist.mediacoin.com:
+    container_name: peer1.artist.mediacoin.com
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer1.artist.mediacoin.com
+    networks:
+      - byfn
+
+  peer0.buyer.mediacoin.com:
+    container_name: peer0.buyer.mediacoin.com
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer0.buyer.mediacoin.com
+    networks:
+      - byfn
+
+  peer1.buyer.mediacoin.com:
+    container_name: peer1.buyer.mediacoin.com
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer1.buyer.mediacoin.com
+    networks:
+      - byfn
+
+  cli:
+    container_name: cli
+    image: hyperledger/fabric-tools:$IMAGE_TAG
+    tty: true
+    stdin_open: true
+    environment:
+      - SYS_CHANNEL=$SYS_CHANNEL
+      - GOPATH=/opt/gopath
+      - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
+      - FABRIC_LOGGING_SPEC=DEBUG
+      - FABRIC_LOGGING_SPEC=INFO
+      - CORE_PEER_ID=cli
+      - CORE_PEER_ADDRESS=peer0.artist.mediacoin.com:7051
+      - CORE_PEER_LOCALMSPID=artistMSP
+      - CORE_PEER_TLS_ENABLED=true
+      - CORE_PEER_TLS_CERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/artist.mediacoin.com/peers/peer0.artist.mediacoin.com/tls/server.crt
+      - CORE_PEER_TLS_KEY_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/artist.mediacoin.com/peers/peer0.artist.mediacoin.com/tls/server.key
+      - CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/artist.mediacoin.com/peers/peer0.artist.mediacoin.com/tls/ca.crt
+      - CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/artist.mediacoin.com/users/Admin@artist.mediacoin.com/msp
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
+    command: /bin/bash
+    volumes:
+        - /var/run/:/host/var/run/
+        - ./../chaincode/:/opt/gopath/src/github.com/chaincode
+        - ./crypto-config:/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/
+        - ./scripts:/opt/gopath/src/github.com/hyperledger/fabric/peer/scripts/
+        - ./channel-artifacts:/opt/gopath/src/github.com/hyperledger/fabric/peer/channel-artifacts
+    depends_on:
+      - orderer.mediacoin.com
+      - orderer2.mediacoin.com
+      - orderer3.mediacoin.com
+      - orderer4.mediacoin.com
+      - orderer5.mediacoin.com
+      - peer0.artist.mediacoin.com
+      - peer1.artist.mediacoin.com
+      - peer0.buyer.mediacoin.com
+      - peer1.buyer.mediacoin.com
+      - ca.artist.mediacoin.com
+      - ca.buyer.mediacoin.com
+    networks:
+      - byfn

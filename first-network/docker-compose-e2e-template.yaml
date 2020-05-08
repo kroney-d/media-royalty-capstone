@@ -1,0 +1,90 @@
+# Copyright IBM Corp. All Rights Reserved.
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+
+version: '2'
+
+volumes:
+  orderer.mediacoin.com:
+  peer0.artist.mediacoin.com:
+  peer1.artist.mediacoin.com:
+  peer0.buyer.mediacoin.com:
+  peer1.buyer.mediacoin.com:
+
+networks:
+  byfn:
+services:
+  ca0:
+    image: hyperledger/fabric-ca:$IMAGE_TAG
+    environment:
+      - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
+      - FABRIC_CA_SERVER_CA_NAME=ca-artist
+      - FABRIC_CA_SERVER_TLS_ENABLED=true
+      - FABRIC_CA_SERVER_TLS_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.artist.mediacoin.com-cert.pem
+      - FABRIC_CA_SERVER_TLS_KEYFILE=/etc/hyperledger/fabric-ca-server-config/CA1_PRIVATE_KEY
+    ports:
+      - "7054:7054"
+    command: sh -c 'fabric-ca-server start --ca.certfile /etc/hyperledger/fabric-ca-server-config/ca.artist.mediacoin.com-cert.pem --ca.keyfile /etc/hyperledger/fabric-ca-server-config/CA1_PRIVATE_KEY -b admin:adminpw -d'
+    volumes:
+      - ./crypto-config/peerOrganizations/artist.mediacoin.com/ca/:/etc/hyperledger/fabric-ca-server-config
+    container_name: ca_peerartist
+    networks:
+      - byfn
+
+  ca1:
+    image: hyperledger/fabric-ca:$IMAGE_TAG
+    environment:
+      - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
+      - FABRIC_CA_SERVER_CA_NAME=ca-buyer
+      - FABRIC_CA_SERVER_TLS_ENABLED=true
+      - FABRIC_CA_SERVER_TLS_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.buyer.mediacoin.com-cert.pem
+      - FABRIC_CA_SERVER_TLS_KEYFILE=/etc/hyperledger/fabric-ca-server-config/CA2_PRIVATE_KEY
+    ports:
+      - "8054:7054"
+    command: sh -c 'fabric-ca-server start --ca.certfile /etc/hyperledger/fabric-ca-server-config/ca.buyer.mediacoin.com-cert.pem --ca.keyfile /etc/hyperledger/fabric-ca-server-config/CA2_PRIVATE_KEY -b admin:adminpw -d'
+    volumes:
+      - ./crypto-config/peerOrganizations/buyer.mediacoin.com/ca/:/etc/hyperledger/fabric-ca-server-config
+    container_name: ca_peerbuyer
+    networks:
+      - byfn
+
+  orderer.mediacoin.com:
+    extends:
+      file:   base/docker-compose-base.yaml
+      service: orderer.mediacoin.com
+    container_name: orderer.mediacoin.com
+    networks:
+      - byfn
+
+  peer0.artist.mediacoin.com:
+    container_name: peer0.artist.mediacoin.com
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer0.artist.mediacoin.com
+    networks:
+      - byfn
+
+  peer1.artist.mediacoin.com:
+    container_name: peer1.artist.mediacoin.com
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer1.artist.mediacoin.com
+    networks:
+      - byfn
+
+  peer0.buyer.mediacoin.com:
+    container_name: peer0.buyer.mediacoin.com
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer0.buyer.mediacoin.com
+    networks:
+      - byfn
+
+  peer1.buyer.mediacoin.com:
+    container_name: peer1.buyer.mediacoin.com
+    extends:
+      file:  base/docker-compose-base.yaml
+      service: peer1.buyer.mediacoin.com
+    networks:
+      - byfn

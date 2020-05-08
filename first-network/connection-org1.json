@@ -1,0 +1,60 @@
+{
+    "name": "first-network-artist",
+    "version": "1.0.0",
+    "client": {
+        "organization": "artist",
+        "connection": {
+            "timeout": {
+                "peer": {
+                    "endorser": "300"
+                }
+            }
+        }
+    },
+    "organizations": {
+        "artist": {
+            "mspid": "artistMSP",
+            "peers": [
+                "peer0.artist.mediacoin.com",
+                "peer1.artist.mediacoin.com"
+            ],
+            "certificateAuthorities": [
+                "ca.artist.mediacoin.com"
+            ]
+        }
+    },
+    "peers": {
+        "peer0.artist.mediacoin.com": {
+            "url": "grpcs://localhost:7051",
+            "tlsCACerts": {
+                "pem": "-----BEGIN CERTIFICATE-----\nMIICYTCCAgagAwIBAgIRAOQhEyybg1URBaqaDgMKltEwCgYIKoZIzj0EAwIwejEL\nMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFjAUBgNVBAcTDVNhbiBG\ncmFuY2lzY28xGzAZBgNVBAoTEm9yZzEubWVkaWFjb2luLmNvbTEhMB8GA1UEAxMY\ndGxzY2Eub3JnMS5tZWRpYWNvaW4uY29tMB4XDTIwMDQyNDIyMDUwMFoXDTMwMDQy\nMjIyMDUwMFowejELMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFjAU\nBgNVBAcTDVNhbiBGcmFuY2lzY28xGzAZBgNVBAoTEm9yZzEubWVkaWFjb2luLmNv\nbTEhMB8GA1UEAxMYdGxzY2Eub3JnMS5tZWRpYWNvaW4uY29tMFkwEwYHKoZIzj0C\nAQYIKoZIzj0DAQcDQgAEdiWJ8QjcVaKoyVrPPy7e+AZQRYMQgbNFYyREqT3QMFga\nj1nmw0V1gUiLu99wefQ5LyvX7IvueoB1X1VawdX3bqNtMGswDgYDVR0PAQH/BAQD\nAgGmMB0GA1UdJQQWMBQGCCsGAQUFBwMCBggrBgEFBQcDATAPBgNVHRMBAf8EBTAD\nAQH/MCkGA1UdDgQiBCAYK4QCXkmvSj4eJrC1zGyHFtLA5n6S7o/xjNSvnUAbTjAK\nBggqhkjOPQQDAgNJADBGAiEAyVqQ6UB80h1h1LsNAU+3zbcuCQ9OlV3zKOM6w/qu\n5yECIQCDI3eg5ZVvOLsc77TDgMzhuoOoITzPO1rzTCfy/nHW4A==\n-----END CERTIFICATE-----\n"
+            },
+            "grpcOptions": {
+                "ssl-target-name-override": "peer0.artist.mediacoin.com",
+                "hostnameOverride": "peer0.artist.mediacoin.com"
+            }
+        },
+        "peer1.artist.mediacoin.com": {
+            "url": "grpcs://localhost:8051",
+            "tlsCACerts": {
+                "pem": "-----BEGIN CERTIFICATE-----\nMIICYTCCAgagAwIBAgIRAOQhEyybg1URBaqaDgMKltEwCgYIKoZIzj0EAwIwejEL\nMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFjAUBgNVBAcTDVNhbiBG\ncmFuY2lzY28xGzAZBgNVBAoTEm9yZzEubWVkaWFjb2luLmNvbTEhMB8GA1UEAxMY\ndGxzY2Eub3JnMS5tZWRpYWNvaW4uY29tMB4XDTIwMDQyNDIyMDUwMFoXDTMwMDQy\nMjIyMDUwMFowejELMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFjAU\nBgNVBAcTDVNhbiBGcmFuY2lzY28xGzAZBgNVBAoTEm9yZzEubWVkaWFjb2luLmNv\nbTEhMB8GA1UEAxMYdGxzY2Eub3JnMS5tZWRpYWNvaW4uY29tMFkwEwYHKoZIzj0C\nAQYIKoZIzj0DAQcDQgAEdiWJ8QjcVaKoyVrPPy7e+AZQRYMQgbNFYyREqT3QMFga\nj1nmw0V1gUiLu99wefQ5LyvX7IvueoB1X1VawdX3bqNtMGswDgYDVR0PAQH/BAQD\nAgGmMB0GA1UdJQQWMBQGCCsGAQUFBwMCBggrBgEFBQcDATAPBgNVHRMBAf8EBTAD\nAQH/MCkGA1UdDgQiBCAYK4QCXkmvSj4eJrC1zGyHFtLA5n6S7o/xjNSvnUAbTjAK\nBggqhkjOPQQDAgNJADBGAiEAyVqQ6UB80h1h1LsNAU+3zbcuCQ9OlV3zKOM6w/qu\n5yECIQCDI3eg5ZVvOLsc77TDgMzhuoOoITzPO1rzTCfy/nHW4A==\n-----END CERTIFICATE-----\n"
+            },
+            "grpcOptions": {
+                "ssl-target-name-override": "peer1.artist.mediacoin.com",
+                "hostnameOverride": "peer1.artist.mediacoin.com"
+            }
+        }
+    },
+    "certificateAuthorities": {
+        "ca.artist.mediacoin.com": {
+            "url": "https://localhost:7054",
+            "caName": "ca-artist",
+            "tlsCACerts": {
+                "pem": "-----BEGIN CERTIFICATE-----\nMIICWTCCAgCgAwIBAgIRAMZ0QBRfAkL/6OruAoU+ULMwCgYIKoZIzj0EAwIwdzEL\nMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFjAUBgNVBAcTDVNhbiBG\ncmFuY2lzY28xGzAZBgNVBAoTEm9yZzEubWVkaWFjb2luLmNvbTEeMBwGA1UEAxMV\nY2Eub3JnMS5tZWRpYWNvaW4uY29tMB4XDTIwMDQyNDIyMDUwMFoXDTMwMDQyMjIy\nMDUwMFowdzELMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFjAUBgNV\nBAcTDVNhbiBGcmFuY2lzY28xGzAZBgNVBAoTEm9yZzEubWVkaWFjb2luLmNvbTEe\nMBwGA1UEAxMVY2Eub3JnMS5tZWRpYWNvaW4uY29tMFkwEwYHKoZIzj0CAQYIKoZI\nzj0DAQcDQgAEKe6JehwUPgDGJu8IgFVWdiz962jFCH1INk26JQINEkJzc8TZoYN4\nZ2BeTCuSTpK1OEqcUKYVwinOMguiP1+TlqNtMGswDgYDVR0PAQH/BAQDAgGmMB0G\nA1UdJQQWMBQGCCsGAQUFBwMCBggrBgEFBQcDATAPBgNVHRMBAf8EBTADAQH/MCkG\nA1UdDgQiBCDGTJ1hsN0M6X6O1jTa7Ez52Wxfts6tBWwQsa2uAo9lEDAKBggqhkjO\nPQQDAgNHADBEAiBfudisb/ujQAN/2GJDYcAx3hqIPMGMP7922858jgjjfwIgSZsy\n8nCmycRFhNPuSyNbMZYwq2BSUs9J08/P+ZNiZCo=\n-----END CERTIFICATE-----\n"
+            },
+            "httpOptions": {
+                "verify": false
+            }
+        }
+    }
+}

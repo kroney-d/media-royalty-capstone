@@ -1,0 +1,88 @@
+---
+name: first-network-buyer
+version: 1.0.0
+client:
+  organization: buyer
+  connection:
+    timeout:
+      peer:
+        endorser: '300'
+organizations:
+  buyer:
+    mspid: buyerMSP
+    peers:
+    - peer0.buyer.mediacoin.com
+    - peer1.buyer.mediacoin.com
+    certificateAuthorities:
+    - ca.buyer.mediacoin.com
+peers:
+  peer0.buyer.mediacoin.com:
+    url: grpcs://localhost:9051
+    tlsCACerts:
+      pem: |
+        -----BEGIN CERTIFICATE-----
+        MIICXzCCAgWgAwIBAgIQSdupjhLBzEzkii18i5IYCDAKBggqhkjOPQQDAjB6MQsw
+        CQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNU2FuIEZy
+        YW5jaXNjbzEbMBkGA1UEChMSb3JnMi5tZWRpYWNvaW4uY29tMSEwHwYDVQQDExh0
+        bHNjYS5vcmcyLm1lZGlhY29pbi5jb20wHhcNMjAwNDI1MjAzMzAwWhcNMzAwNDIz
+        MjAzMzAwWjB6MQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQG
+        A1UEBxMNU2FuIEZyYW5jaXNjbzEbMBkGA1UEChMSb3JnMi5tZWRpYWNvaW4uY29t
+        MSEwHwYDVQQDExh0bHNjYS5vcmcyLm1lZGlhY29pbi5jb20wWTATBgcqhkjOPQIB
+        BggqhkjOPQMBBwNCAARhDiU4zHLfXInmZoT4ylfC+yCWGCS/mjAXjmvjDn/M3IOh
+        eWpBXiPiRVN936atkNqRD3oeknLDsK6cD3bjhGKLo20wazAOBgNVHQ8BAf8EBAMC
+        AaYwHQYDVR0lBBYwFAYIKwYBBQUHAwIGCCsGAQUFBwMBMA8GA1UdEwEB/wQFMAMB
+        Af8wKQYDVR0OBCIEIG/b3bo1On5qHQlJTAL0L7MIu883v0wf4acybX72lTxYMAoG
+        CCqGSM49BAMCA0gAMEUCIQDUSOUGJ40eRRtSaFs9BOL57u2917O0t/TLwfy9nFNx
+        EwIgbyQ05MLzfr08UGYorPsC1G5P9ey+WJrjKzOY8CH+uKw=
+        -----END CERTIFICATE-----
+        
+    grpcOptions:
+      ssl-target-name-override: peer0.buyer.mediacoin.com
+      hostnameOverride: peer0.buyer.mediacoin.com
+  peer1.buyer.mediacoin.com:
+    url: grpcs://localhost:10051
+    tlsCACerts:
+      pem: |
+        -----BEGIN CERTIFICATE-----
+        MIICXzCCAgWgAwIBAgIQSdupjhLBzEzkii18i5IYCDAKBggqhkjOPQQDAjB6MQsw
+        CQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNU2FuIEZy
+        YW5jaXNjbzEbMBkGA1UEChMSb3JnMi5tZWRpYWNvaW4uY29tMSEwHwYDVQQDExh0
+        bHNjYS5vcmcyLm1lZGlhY29pbi5jb20wHhcNMjAwNDI1MjAzMzAwWhcNMzAwNDIz
+        MjAzMzAwWjB6MQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQG
+        A1UEBxMNU2FuIEZyYW5jaXNjbzEbMBkGA1UEChMSb3JnMi5tZWRpYWNvaW4uY29t
+        MSEwHwYDVQQDExh0bHNjYS5vcmcyLm1lZGlhY29pbi5jb20wWTATBgcqhkjOPQIB
+        BggqhkjOPQMBBwNCAARhDiU4zHLfXInmZoT4ylfC+yCWGCS/mjAXjmvjDn/M3IOh
+        eWpBXiPiRVN936atkNqRD3oeknLDsK6cD3bjhGKLo20wazAOBgNVHQ8BAf8EBAMC
+        AaYwHQYDVR0lBBYwFAYIKwYBBQUHAwIGCCsGAQUFBwMBMA8GA1UdEwEB/wQFMAMB
+        Af8wKQYDVR0OBCIEIG/b3bo1On5qHQlJTAL0L7MIu883v0wf4acybX72lTxYMAoG
+        CCqGSM49BAMCA0gAMEUCIQDUSOUGJ40eRRtSaFs9BOL57u2917O0t/TLwfy9nFNx
+        EwIgbyQ05MLzfr08UGYorPsC1G5P9ey+WJrjKzOY8CH+uKw=
+        -----END CERTIFICATE-----
+        
+    grpcOptions:
+      ssl-target-name-override: peer1.buyer.mediacoin.com
+      hostnameOverride: peer1.buyer.mediacoin.com
+certificateAuthorities:
+  ca.buyer.mediacoin.com:
+    url: https://localhost:8054
+    caName: ca-buyer
+    tlsCACerts:
+      pem: |
+        -----BEGIN CERTIFICATE-----
+        MIICWTCCAf+gAwIBAgIQPcxib4/AdD2BSO6pilH28DAKBggqhkjOPQQDAjB3MQsw
+        CQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNU2FuIEZy
+        YW5jaXNjbzEbMBkGA1UEChMSb3JnMi5tZWRpYWNvaW4uY29tMR4wHAYDVQQDExVj
+        YS5vcmcyLm1lZGlhY29pbi5jb20wHhcNMjAwNDI1MjAzMzAwWhcNMzAwNDIzMjAz
+        MzAwWjB3MQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UE
+        BxMNU2FuIEZyYW5jaXNjbzEbMBkGA1UEChMSb3JnMi5tZWRpYWNvaW4uY29tMR4w
+        HAYDVQQDExVjYS5vcmcyLm1lZGlhY29pbi5jb20wWTATBgcqhkjOPQIBBggqhkjO
+        PQMBBwNCAARkQGsnSXGs5KMfjuWuozcWHA935XCj9cTfx4eTyiVPG+Oz47SLszzM
+        urAvF28xu/yvAqzV0z7enuYxAF3chQ7Io20wazAOBgNVHQ8BAf8EBAMCAaYwHQYD
+        VR0lBBYwFAYIKwYBBQUHAwIGCCsGAQUFBwMBMA8GA1UdEwEB/wQFMAMBAf8wKQYD
+        VR0OBCIEIDQMFAkiMb6+g5i3l2YG6ZzJfAzRqz/A1BLKT7+eZkqIMAoGCCqGSM49
+        BAMCA0gAMEUCIFirDqCSxXlFIXcSsmR5RtDNOfxNRMf7BF62IUNv+f40AiEA8wtV
+        sLKE0GYQNfGCzQAcCgZHLpIqxfDwQFNP6Vk68GU=
+        -----END CERTIFICATE-----
+        
+    httpOptions:
+      verify: false

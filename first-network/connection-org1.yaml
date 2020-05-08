@@ -1,0 +1,88 @@
+---
+name: first-network-artist
+version: 1.0.0
+client:
+  organization: artist
+  connection:
+    timeout:
+      peer:
+        endorser: '300'
+organizations:
+  artist:
+    mspid: artistMSP
+    peers:
+    - peer0.artist.mediacoin.com
+    - peer1.artist.mediacoin.com
+    certificateAuthorities:
+    - ca.artist.mediacoin.com
+peers:
+  peer0.artist.mediacoin.com:
+    url: grpcs://localhost:7051
+    tlsCACerts:
+      pem: |
+        -----BEGIN CERTIFICATE-----
+        MIICYTCCAgagAwIBAgIRAOQhEyybg1URBaqaDgMKltEwCgYIKoZIzj0EAwIwejEL
+        MAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFjAUBgNVBAcTDVNhbiBG
+        cmFuY2lzY28xGzAZBgNVBAoTEm9yZzEubWVkaWFjb2luLmNvbTEhMB8GA1UEAxMY
+        dGxzY2Eub3JnMS5tZWRpYWNvaW4uY29tMB4XDTIwMDQyNDIyMDUwMFoXDTMwMDQy
+        MjIyMDUwMFowejELMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFjAU
+        BgNVBAcTDVNhbiBGcmFuY2lzY28xGzAZBgNVBAoTEm9yZzEubWVkaWFjb2luLmNv
+        bTEhMB8GA1UEAxMYdGxzY2Eub3JnMS5tZWRpYWNvaW4uY29tMFkwEwYHKoZIzj0C
+        AQYIKoZIzj0DAQcDQgAEdiWJ8QjcVaKoyVrPPy7e+AZQRYMQgbNFYyREqT3QMFga
+        j1nmw0V1gUiLu99wefQ5LyvX7IvueoB1X1VawdX3bqNtMGswDgYDVR0PAQH/BAQD
+        AgGmMB0GA1UdJQQWMBQGCCsGAQUFBwMCBggrBgEFBQcDATAPBgNVHRMBAf8EBTAD
+        AQH/MCkGA1UdDgQiBCAYK4QCXkmvSj4eJrC1zGyHFtLA5n6S7o/xjNSvnUAbTjAK
+        BggqhkjOPQQDAgNJADBGAiEAyVqQ6UB80h1h1LsNAU+3zbcuCQ9OlV3zKOM6w/qu
+        5yECIQCDI3eg5ZVvOLsc77TDgMzhuoOoITzPO1rzTCfy/nHW4A==
+        -----END CERTIFICATE-----
+        
+    grpcOptions:
+      ssl-target-name-override: peer0.artist.mediacoin.com
+      hostnameOverride: peer0.artist.mediacoin.com
+  peer1.artist.mediacoin.com:
+    url: grpcs://localhost:8051
+    tlsCACerts:
+      pem: |
+        -----BEGIN CERTIFICATE-----
+        MIICYTCCAgagAwIBAgIRAOQhEyybg1URBaqaDgMKltEwCgYIKoZIzj0EAwIwejEL
+        MAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFjAUBgNVBAcTDVNhbiBG
+        cmFuY2lzY28xGzAZBgNVBAoTEm9yZzEubWVkaWFjb2luLmNvbTEhMB8GA1UEAxMY
+        dGxzY2Eub3JnMS5tZWRpYWNvaW4uY29tMB4XDTIwMDQyNDIyMDUwMFoXDTMwMDQy
+        MjIyMDUwMFowejELMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFjAU
+        BgNVBAcTDVNhbiBGcmFuY2lzY28xGzAZBgNVBAoTEm9yZzEubWVkaWFjb2luLmNv
+        bTEhMB8GA1UEAxMYdGxzY2Eub3JnMS5tZWRpYWNvaW4uY29tMFkwEwYHKoZIzj0C
+        AQYIKoZIzj0DAQcDQgAEdiWJ8QjcVaKoyVrPPy7e+AZQRYMQgbNFYyREqT3QMFga
+        j1nmw0V1gUiLu99wefQ5LyvX7IvueoB1X1VawdX3bqNtMGswDgYDVR0PAQH/BAQD
+        AgGmMB0GA1UdJQQWMBQGCCsGAQUFBwMCBggrBgEFBQcDATAPBgNVHRMBAf8EBTAD
+        AQH/MCkGA1UdDgQiBCAYK4QCXkmvSj4eJrC1zGyHFtLA5n6S7o/xjNSvnUAbTjAK
+        BggqhkjOPQQDAgNJADBGAiEAyVqQ6UB80h1h1LsNAU+3zbcuCQ9OlV3zKOM6w/qu
+        5yECIQCDI3eg5ZVvOLsc77TDgMzhuoOoITzPO1rzTCfy/nHW4A==
+        -----END CERTIFICATE-----
+        
+    grpcOptions:
+      ssl-target-name-override: peer1.artist.mediacoin.com
+      hostnameOverride: peer1.artist.mediacoin.com
+certificateAuthorities:
+  ca.artist.mediacoin.com:
+    url: https://localhost:7054
+    caName: ca-artist
+    tlsCACerts:
+      pem: |
+        -----BEGIN CERTIFICATE-----
+        MIICWTCCAgCgAwIBAgIRAMZ0QBRfAkL/6OruAoU+ULMwCgYIKoZIzj0EAwIwdzEL
+        MAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFjAUBgNVBAcTDVNhbiBG
+        cmFuY2lzY28xGzAZBgNVBAoTEm9yZzEubWVkaWFjb2luLmNvbTEeMBwGA1UEAxMV
+        Y2Eub3JnMS5tZWRpYWNvaW4uY29tMB4XDTIwMDQyNDIyMDUwMFoXDTMwMDQyMjIy
+        MDUwMFowdzELMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFjAUBgNV
+        BAcTDVNhbiBGcmFuY2lzY28xGzAZBgNVBAoTEm9yZzEubWVkaWFjb2luLmNvbTEe
+        MBwGA1UEAxMVY2Eub3JnMS5tZWRpYWNvaW4uY29tMFkwEwYHKoZIzj0CAQYIKoZI
+        zj0DAQcDQgAEKe6JehwUPgDGJu8IgFVWdiz962jFCH1INk26JQINEkJzc8TZoYN4
+        Z2BeTCuSTpK1OEqcUKYVwinOMguiP1+TlqNtMGswDgYDVR0PAQH/BAQDAgGmMB0G
+        A1UdJQQWMBQGCCsGAQUFBwMCBggrBgEFBQcDATAPBgNVHRMBAf8EBTADAQH/MCkG
+        A1UdDgQiBCDGTJ1hsN0M6X6O1jTa7Ez52Wxfts6tBWwQsa2uAo9lEDAKBggqhkjO
+        PQQDAgNHADBEAiBfudisb/ujQAN/2GJDYcAx3hqIPMGMP7922858jgjjfwIgSZsy
+        8nCmycRFhNPuSyNbMZYwq2BSUs9J08/P+ZNiZCo=
+        -----END CERTIFICATE-----
+        
+    httpOptions:
+      verify: false
